@@ -13,7 +13,9 @@ class User < ApplicationRecord
 
   enum gender: { man: 0, woman: 1 }
   validates :self_introduction, length: { maximum: 500 }
+
   mount_uploader :profile_image, ProfileImageUploader
+  has_one_attached :image
 
   def update_without_current_password(params, *options)
 
@@ -25,6 +27,17 @@ class User < ApplicationRecord
     result = update_attributes(params, *options)
     clean_up_passwords
     result
+  end
+
+  # ゲストログイン機能
+  def self.guest
+    find_or_create_by!(email: 'guest@example.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲスト"
+      user.gender = 1
+      user.self_introduction = '僕を好きになってください'
+      user.image.attach(io: File.open("#{Rails.root}/db/dummy_images/man.jpg"), filename: "man.jpg")
+    end
   end
 
 end
