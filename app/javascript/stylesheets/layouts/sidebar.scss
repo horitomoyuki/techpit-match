@@ -1,0 +1,27 @@
+.side-logo__img {
+  position: absolute;
+  top: 10px;
+  left: 50px;
+}
+.element {
+  margin-top: 50px;
+}
+.elements {
+  display: flex;
+  border-radius: 10px;
+}
+.elements:hover {
+  /* background-color: #ebeced; */
+}
+
+.log-btn {
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 600;
+  color: rgb(62, 68, 72);
+  background-color: #FFF;
+  border-style: none;
+}
+.log-btn:hover {
+  background-color: #ebeced;
+}
